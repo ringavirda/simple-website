@@ -1,8 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors();
 
 var app = builder.Build();
+app.UseCors(
+    options => options.AllowAnyOrigin().AllowAnyMethod()
+);
 
 app.MapGet("/api", () =>
 {
