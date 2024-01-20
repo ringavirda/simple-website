@@ -6,7 +6,7 @@ app.UseCors(
     options => options.AllowAnyOrigin().AllowAnyMethod()
 );
 
-app.MapGet("/api", () =>
+app.MapGet("/api/sample", () =>
 {
     var response = new ApiResponse(
         Guid.NewGuid(),
@@ -15,12 +15,12 @@ app.MapGet("/api", () =>
     return Results.Ok(response);
 });
 
-app.MapGet("/ftp", () =>
+app.MapGet("/api/ftp", () =>
 {
     return Results.NotFound();
 });
 
-app.MapGet("/ftp/download", () => {
+app.MapGet("/api/download", () => {
     
 });
 
