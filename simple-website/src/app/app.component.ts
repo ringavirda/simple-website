@@ -38,7 +38,7 @@ export class AppComponent {
       "Checking if FTP is available...");
   }
   
-  private serverUrl = "http://fallen.dev.net/api";
+  private serverUrl = "https://fallen.dev.net/api";
 
   ngOnInit(): void {
   this.http.get<IApiResponse>(this.serverUrl + "/sample").subscribe({
