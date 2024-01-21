@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
@@ -45,14 +46,18 @@ app.MapGet("/api/download", async () =>
             WebRequest.Create($"ftp://{ftpServer}/test_file.txt");
         ftpRequest.Credentials = new NetworkCredential("vsftpd", "password");
         ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+        ftpRequest.KeepAlive = false;
+
+        ftpRequest.EnableSsl = true;
+        var cert = X509Certificate.CreateFromCertFile("/home/fallen/cacert.pem");
+        ftpRequest.ClientCertificates.Add(cert);
         
         var resp = await ftpRequest.GetResponseAsync();
-        using (Stream ftpStream = resp.GetResponseStream())
-        {
-            return ftpStream == null 
+        var ftpStream = resp.GetResponseStream();
+        
+        return ftpStream == null 
                 ? Results.NotFound() 
                 : Results.File(ftpStream, "application/octet-stream", "ftp_file.txt");
-        }
     }
     else
         return Results.NotFound();

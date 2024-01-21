@@ -75,7 +75,7 @@ export class AppComponent {
           let downloadLink = document.createElement("a");
           downloadLink.href = window.URL.createObjectURL(
             new Blob(binaryData, { type: dataType }));
-          downloadLink.setAttribute("download", "ftp_file.json");
+          downloadLink.setAttribute("download", "ftp_file.txt");
           document.body.appendChild(downloadLink);
           downloadLink.click();
         });
