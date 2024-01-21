@@ -37,11 +37,12 @@ export class AppComponent {
     this.ftpStatus$ = new BehaviorSubject<string>(
       "Checking if FTP is available...");
   }
-  
-  private serverUrl = "https://fallen.dev.net/api";
+
+//  private serverUrl = "https://fallen.dev.net/api";
+  private serverUrl = "http://localhost:5000/api";
 
   ngOnInit(): void {
-  this.http.get<IApiResponse>(this.serverUrl + "/sample").subscribe({
+    this.http.get<IApiResponse>(this.serverUrl + "/sample").subscribe({
       next: data => {
         this.apiRespStatus$.next("API retrieval completed!");
         this.apiResp$.next(data);
@@ -65,6 +66,18 @@ export class AppComponent {
   }
 
   onDownload(): void {
-
+    this.http.get(this.serverUrl + "/download",
+      { responseType: "blob" as "json" }).subscribe(
+        (response: any) => {
+          let dataType = response.type;
+          let binaryData = [];
+          binaryData.push(response);
+          let downloadLink = document.createElement("a");
+          downloadLink.href = window.URL.createObjectURL(
+            new Blob(binaryData, { type: dataType }));
+          downloadLink.setAttribute("download", "ftp_file.json");
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+        });
   }
 }
