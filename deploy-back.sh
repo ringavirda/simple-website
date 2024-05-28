@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-cd SimpleApi # back-end part
+cd SimpleApi || exit # back-end part
 
-if [ ! $(which git) ]; then
+if [ ! "$(which git)" ]; then
     echo "Git is missing! Please install it."	
     exit
 else
@@ -9,7 +9,7 @@ else
     git pull
 fi
 
-if [ ! $(which dotnet) ]; then
+if [ ! "$(which dotnet)" ]; then
     echo "Dotnet is not present! Please install it."
     exit
 else

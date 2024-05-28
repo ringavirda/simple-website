@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-cd simple-website # front-end part
+cd simple-website || exit # front-end part
 
-if [ ! $(which git) ]; then
+if [ ! "$(which git)" ]; then
     echo "Git is missing! Please install it."	
     exit
 else
@@ -9,7 +9,7 @@ else
     git pull
 fi
 
-if [ ! $(which ng) ]; then
+if [ ! "$(which ng)" ]; then
     echo "Ng is not present! Please install it."
     exit
 else

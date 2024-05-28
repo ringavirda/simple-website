@@ -22,7 +22,7 @@ interface IApiResponse {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  apiRespStatus$: BehaviorSubject<string>;;
+  apiRespStatus$: BehaviorSubject<string>;
   apiResp$: BehaviorSubject<IApiResponse>;
 
   ftpStatus$: BehaviorSubject<string>;
@@ -39,7 +39,6 @@ export class AppComponent {
   }
 
   private serverUrl = "https://fallen.dev.net/api";
-  // private serverUrl = "http://localhost:5000/api";
 
   ngOnInit(): void {
     this.http.get<IApiResponse>(this.serverUrl + "/sample").subscribe({

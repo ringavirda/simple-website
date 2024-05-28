@@ -66,6 +66,11 @@
                 cursor: pointer;
                 background-color: darkorange;
             }
+
+            &:active {
+                cursor: pointer;
+                background-color: orange;
+            }
         }
         .btn-inactive {
             text-align: center;
